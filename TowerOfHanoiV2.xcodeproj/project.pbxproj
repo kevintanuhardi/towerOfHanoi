@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1811239F262E776C0002ABBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811239E262E776C0002ABBA /* AppDelegate.swift */; };
+		181123A1262E776C0002ABBA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181123A0262E776C0002ABBA /* SceneDelegate.swift */; };
+		181123A3262E776C0002ABBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181123A2262E776C0002ABBA /* ViewController.swift */; };
+		181123A6262E776C0002ABBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181123A4262E776C0002ABBA /* Main.storyboard */; };
+		181123A8262E776E0002ABBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 181123A7262E776E0002ABBA /* Assets.xcassets */; };
+		181123AB262E776E0002ABBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181123A9262E776E0002ABBA /* LaunchScreen.storyboard */; };
+		182B571F262F24DA000B7EAE /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B571E262F24DA000B7EAE /* Disk.swift */; };
+		182B5723262F2864000B7EAE /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B5722262F2864000B7EAE /* Helper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1811239B262E776C0002ABBA /* TowerOfHanoiV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerOfHanoiV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1811239E262E776C0002ABBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		181123A0262E776C0002ABBA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		181123A2262E776C0002ABBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		181123A5262E776C0002ABBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		181123A7262E776E0002ABBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		181123AA262E776E0002ABBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		181123AC262E776E0002ABBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		182B571E262F24DA000B7EAE /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
+		182B5722262F2864000B7EAE /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18112398262E776C0002ABBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18112392262E776C0002ABBA = {
+			isa = PBXGroup;
+			children = (
+				1811239D262E776C0002ABBA /* TowerOfHanoiV2 */,
+				1811239C262E776C0002ABBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1811239C262E776C0002ABBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1811239B262E776C0002ABBA /* TowerOfHanoiV2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1811239D262E776C0002ABBA /* TowerOfHanoiV2 */ = {
+			isa = PBXGroup;
+			children = (
+				182B571D262F2493000B7EAE /* View */,
+				182B571C262F2489000B7EAE /* Controller */,
+				182B571B262F2475000B7EAE /* Model */,
+				1811239E262E776C0002ABBA /* AppDelegate.swift */,
+				181123A0262E776C0002ABBA /* SceneDelegate.swift */,
+				181123A7262E776E0002ABBA /* Assets.xcassets */,
+				181123AC262E776E0002ABBA /* Info.plist */,
+			);
+			path = TowerOfHanoiV2;
+			sourceTree = "<group>";
+		};
+		182B571B262F2475000B7EAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				182B571E262F24DA000B7EAE /* Disk.swift */,
+				182B5722262F2864000B7EAE /* Helper.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		182B571C262F2489000B7EAE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				181123A2262E776C0002ABBA /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		182B571D262F2493000B7EAE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				181123A4262E776C0002ABBA /* Main.storyboard */,
+				181123A9262E776E0002ABBA /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1811239A262E776C0002ABBA /* TowerOfHanoiV2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 181123AF262E776E0002ABBA /* Build configuration list for PBXNativeTarget "TowerOfHanoiV2" */;
+			buildPhases = (
+				18112397262E776C0002ABBA /* Sources */,
+				18112398262E776C0002ABBA /* Frameworks */,
+				18112399262E776C0002ABBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TowerOfHanoiV2;
+			productName = TowerOfHanoiV2;
+			productReference = 1811239B262E776C0002ABBA /* TowerOfHanoiV2.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18112393262E776C0002ABBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					1811239A262E776C0002ABBA = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = 18112396262E776C0002ABBA /* Build configuration list for PBXProject "TowerOfHanoiV2" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18112392262E776C0002ABBA;
+			productRefGroup = 1811239C262E776C0002ABBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1811239A262E776C0002ABBA /* TowerOfHanoiV2 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18112399262E776C0002ABBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				181123AB262E776E0002ABBA /* LaunchScreen.storyboard in Resources */,
+				181123A8262E776E0002ABBA /* Assets.xcassets in Resources */,
+				181123A6262E776C0002ABBA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18112397262E776C0002ABBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				182B571F262F24DA000B7EAE /* Disk.swift in Sources */,
+				181123A3262E776C0002ABBA /* ViewController.swift in Sources */,
+				182B5723262F2864000B7EAE /* Helper.swift in Sources */,
+				1811239F262E776C0002ABBA /* AppDelegate.swift in Sources */,
+				181123A1262E776C0002ABBA /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		181123A4262E776C0002ABBA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				181123A5262E776C0002ABBA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		181123A9262E776E0002ABBA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				181123AA262E776E0002ABBA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		181123AD262E776E0002ABBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		181123AE262E776E0002ABBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		181123B0262E776E0002ABBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8PNJ3DJJR6;
+				INFOPLIST_FILE = TowerOfHanoiV2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevintanuhardi.TowerOfHanoiV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		181123B1262E776E0002ABBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8PNJ3DJJR6;
+				INFOPLIST_FILE = TowerOfHanoiV2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevintanuhardi.TowerOfHanoiV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18112396262E776C0002ABBA /* Build configuration list for PBXProject "TowerOfHanoiV2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				181123AD262E776E0002ABBA /* Debug */,
+				181123AE262E776E0002ABBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		181123AF262E776E0002ABBA /* Build configuration list for PBXNativeTarget "TowerOfHanoiV2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				181123B0262E776E0002ABBA /* Debug */,
+				181123B1262E776E0002ABBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18112393262E776C0002ABBA /* Project object */;
+}
