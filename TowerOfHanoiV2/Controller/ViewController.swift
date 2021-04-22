@@ -17,9 +17,12 @@ struct DiskPosition {
     var middleArea = UIView();
 }
 
-var stick1Arr = [Int]();
-var stick2Arr = [Int]();
-var stick3Arr = [Int]();
+var diskPositionDict = [
+    "left": 0,
+    "middle": 1,
+    "right": 2
+]
+var diskPositionArr = Array(repeating: Array(repeating: 0, count: 0), count: 3);
 
 
 class ViewController: UIViewController {
@@ -34,7 +37,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(diskPosition)
         
         setupDiskNumber(number: 5)
         renderDisks()
@@ -45,8 +47,7 @@ class ViewController: UIViewController {
         let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
         
         
-        for (index, diskDatum) in diskPosition.left.enumerated() {
-            print(diskDatum)
+        for (index, diskDatum) in diskPositionArr[0].enumerated() {
             let diskWidth = diskWidths[diskDatum - 1];
             let diskColor = diskColors[diskDatum - 1];
             createRectangle(
@@ -66,7 +67,6 @@ class ViewController: UIViewController {
         color: UIColor,
         width: Int,
         height: Int
-//        targetView: UIView
     ) {
         let viewObject = UIView();
         viewObject.frame = CGRect(x: 0, y: y, width: width, height: height);
@@ -94,46 +94,37 @@ class ViewController: UIViewController {
             }
         }
         
-        func moveDisk( oldArea: String, newArea: String) {
+        func moveDisk( oldArea: String, newArea: String ,_ onCancel: () -> Void) {
             print(oldArea, newArea)
-            var newStickArr: [Int];
-            var oldStickArr: [Int];
             var newAreaCenterX: CGFloat;
-            var newAreaMaxY: CGFloat;
-            var diskPositionPointer = UnsafePointer(&diskPosition)
+            var movingDiskNum = diskPositionArr[diskPositionDict[oldArea]!].last ?? 0;
+            var topTargetDiskNum = diskPositionArr[diskPositionDict[newArea]!].last ?? 0;
+            
+            print(movingDiskNum, "moving")
+            print(topTargetDiskNum, "new")
+            
+            if (movingDiskNum > topTargetDiskNum && topTargetDiskNum != 0) {
+                onCancel()
+                return print("done")
+            }
             
             if newArea == "left" {
-                newStickArr = diskPosition.left
                 newAreaCenterX = LeftStickArea.center.x
-                newAreaMaxY = leftAreaCoordinate!.maxY
             } else if newArea == "middle" {
-                newStickArr = diskPosition.middle
                 newAreaCenterX = MiddleStickArea.center.x
-                newAreaMaxY = middleAreaCoordinate!.maxY
             } else {
-                newStickArr = diskPosition.right
                 newAreaCenterX = RightStickArea.center.x
-                newAreaMaxY = rightAreaCoordinate!.maxY
             }
             
-            if oldArea == "left" {
-                oldStickArr = diskPosition.left
-            } else if oldArea == "middle" {
-                oldStickArr = diskPosition.middle
-            } else {
-                oldStickArr = diskPosition.right
-            }
-            
-            
-            
-            let yCoordinate = CGFloat(middleAreaCoordinate!.maxY) - CGFloat(newStickArr.count * diskHeight)
+            let yCoordinate = CGFloat(middleAreaCoordinate!.maxY) - CGFloat(diskPositionArr[diskPositionDict[newArea]!].count * diskHeight)
             piece?.center = CGPoint(x: newAreaCenterX, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
-            print(newStickArr, "new")
-            print(oldStickArr, "old")
-            newStickArr.append(oldStickArr.popLast()!)
-            print(newStickArr, "new")
-            print(oldStickArr, "old")
+//            print(diskPositionArr[diskPositionDict[newArea]!], "new")
+//            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
+            diskPositionArr[diskPositionDict[newArea]!].append(diskPositionArr[diskPositionDict[oldArea]!].popLast()!)
+//            print(diskPositionArr[diskPositionDict[newArea]!], "new")
+//            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
         }
+        
         
         guard recognizer.view != nil else {return}
         let piece = recognizer.view
@@ -145,6 +136,10 @@ class ViewController: UIViewController {
         
         if recognizer.state == .began{
             initialCenter = piece!.center
+        }
+        
+        let setToInitialPosition = { () -> Void in
+            piece?.center = self.initialCenter
         }
         
         let originArea:String = classifyArea(initialCenter);
@@ -160,19 +155,7 @@ class ViewController: UIViewController {
         if(recognizer.state == .ended) {
             let targetArea = classifyArea(piece!.center);
             if targetArea != originArea {
-                moveDisk(oldArea: originArea, newArea: targetArea)
-//                if ((middleAreaCoordinate?.contains(piece!.center)) == true) {
-//                    let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick2Arr.count * diskHeight))
-//                    piece?.center = CGPoint(x: MiddleStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
-//                    stick2Arr.append(stick1Arr.popLast()!)
-//                } else if (rightAreaCoordinate?.contains(piece!.center)) == true {
-//                    let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick3Arr.count * diskHeight))
-//                    piece?.center = CGPoint(x: RightStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
-//                    stick3Arr.append(stick1Arr.popLast()!)
-//                } else {
-//                    print("it was here")
-//                    piece?.center = initialCenter
-//                }
+                moveDisk(oldArea: originArea, newArea: targetArea, setToInitialPosition)
             } else {
                 piece?.center = initialCenter;
             }
@@ -181,7 +164,7 @@ class ViewController: UIViewController {
     
     func setupDiskNumber(number: Int) {
         for i in (1 ..< number + 1).reversed() {
-            diskPosition.left.append(i)
+            diskPositionArr[0].append(i)
         }
     }
 }
