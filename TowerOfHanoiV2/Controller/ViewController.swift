@@ -38,6 +38,8 @@ class ViewController: UIViewController {
 
         let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
         
+        print(frameGlobalPosition?.maxY)
+        
         
         for (index, diskDatum) in diskPositionArr[0].enumerated() {
             let diskWidth = diskWidths[diskDatum - 1];
@@ -110,8 +112,8 @@ class ViewController: UIViewController {
             
             let yCoordinate = CGFloat(middleAreaCoordinate!.maxY) - CGFloat(diskPositionArr[diskPositionDict[newArea]!].count * diskHeight)
             piece?.center = CGPoint(x: newAreaCenterX, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
-//            print(diskPositionArr[diskPositionDict[newArea]!], "new")
-//            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
+            print(diskPositionArr[diskPositionDict[newArea]!], "new")
+            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
             diskPositionArr[diskPositionDict[newArea]!].append(diskPositionArr[diskPositionDict[oldArea]!].popLast()!)
 //            print(diskPositionArr[diskPositionDict[newArea]!], "new")
 //            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
