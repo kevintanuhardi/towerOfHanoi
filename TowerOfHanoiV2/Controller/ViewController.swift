@@ -7,16 +7,6 @@
 
 import UIKit
 
-
-struct DiskPosition {
-    var left = [Int]();
-    var middle = [Int]();
-    var right = [Int]();
-    var leftArea = UIView();
-    var rightArea = UIView();
-    var middleArea = UIView();
-}
-
 var diskPositionDict = [
     "left": 0,
     "middle": 1,
@@ -30,15 +20,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var LeftStickArea: UIView!
     @IBOutlet weak var MiddleStickArea: UIView!
     @IBOutlet weak var RightStickArea: UIView!
+
+    @IBOutlet weak var MoveCountLabel: UILabel!
     
     var initialCenter = CGPoint();
-    var diskPosition = DiskPosition();
+    var diskNumber = 5;
+    var moveCount = 0;
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
         
-        
-        setupDiskNumber(number: 5)
+        setupDiskNumber(number: diskNumber)
         renderDisks()
     }
     
@@ -123,6 +115,8 @@ class ViewController: UIViewController {
             diskPositionArr[diskPositionDict[newArea]!].append(diskPositionArr[diskPositionDict[oldArea]!].popLast()!)
 //            print(diskPositionArr[diskPositionDict[newArea]!], "new")
 //            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
+            moveCount += 1
+            MoveCountLabel.text = String(moveCount);
         }
         
         

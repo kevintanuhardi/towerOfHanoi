@@ -97,6 +97,20 @@
                                     <constraint firstItem="XYB-zj-kCe" firstAttribute="centerX" secondItem="6Ll-fP-Uhh" secondAttribute="centerX" id="wd5-t5-ZwV"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MOVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dX-el-Q45">
+                                <rect key="frame" x="26" y="44" width="61" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzW-Wz-QHO">
+                                <rect key="frame" x="28" y="79" width="56" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.8901960784313725" green="0.88627450980392153" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,12 +130,13 @@
                     <connections>
                         <outlet property="LeftStickArea" destination="RTo-9T-t58" id="OeD-1o-Ka4"/>
                         <outlet property="MiddleStickArea" destination="XYB-zj-kCe" id="LvO-hh-Krh"/>
+                        <outlet property="MoveCountLabel" destination="xzW-Wz-QHO" id="Ulv-MK-f2Z"/>
                         <outlet property="RightStickArea" destination="Pav-b8-CQY" id="klv-XV-CaW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="110.49107142857143"/>
+            <point key="canvasLocation" x="130.76923076923077" y="110.18957345971563"/>
         </scene>
     </scenes>
 </document>
