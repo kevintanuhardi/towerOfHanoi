@@ -10,6 +10,7 @@ import UIKit
 var stick1Arr = [Int]();
 var stick2Arr = [Int]();
 var stick3Arr = [Int]();
+var diskPosition = Array(repeating: Array(repeating: 0, count: 0), count: 3)
 
 class ViewController: UIViewController {
     
@@ -22,24 +23,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(diskPosition)
+        
         setupDiskNumber(number: 5)
         renderDisks()
     }
     
     func renderDisks() {
         
-//        print(LeftStickArea.superview!.frame.minY)
-//        print(LeftStickArea.center)
-//        print(LeftStickArea.frame)
-//        print(MiddleStickArea.center)
-//        print(MiddleStickArea.frame)
-//        print(stick1Arr)
+
         
         let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
-//        print(frameGlobalPosition!.maxY)
-//        print(frameGlobalPosition!.height)
-//        print(frameGlobalPosition)
-//        print(MiddleStickArea.center)
         print(stick1Arr)
         
         for (index, diskDatum) in stick1Arr.enumerated() {
@@ -102,18 +96,33 @@ class ViewController: UIViewController {
         viewObject.isUserInteractionEnabled = true
     }
     
+    
     @objc func panGesture(recognizer: UIPanGestureRecognizer){
+        func classifyArea(_ currentCoordinate: CGPoint) -> String {
+            if leftAreaCoordinate?.contains(currentCoordinate) == true {
+                return "left"
+            } else if middleAreaCoordinate?.contains(currentCoordinate) == true {
+                return "middle"
+            } else {
+                return "right"
+            }
+        }
+        
         guard recognizer.view != nil else {return}
         let piece = recognizer.view
         let translation = recognizer.translation(in: piece?.superview)
         
-        func getOriginView = () {
-            
-        }
+        let leftAreaCoordinate = LeftStickArea.superview?.convert(LeftStickArea.frame, to: view)
+        let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
+        let rightAreaCoordinate = RightStickArea.superview?.convert(RightStickArea.frame, to: view)
         
         if recognizer.state == .began{
             initialCenter = piece!.center
         }
+        
+        let originArea:String = classifyArea(initialCenter);
+        
+        print(originArea)
         
         if recognizer.state != .cancelled{
             print("not canceled")
@@ -128,24 +137,13 @@ class ViewController: UIViewController {
             let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
             let rightAreaCoordinate = RightStickArea.superview?.convert(RightStickArea.frame, to: view)
             if ((middleAreaCoordinate?.contains(piece!.center)) == true) {
-//                TODO: move disk datum to arr
-//                print(MiddleStickArea.superview?.convert(MiddleStickArea.center, to: view))
-//                let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick2Arr.count * diskHeight))
-//                piece?.center = CGPoint(x: MiddleStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
+                let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick2Arr.count * diskHeight))
+                piece?.center = CGPoint(x: MiddleStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
                 stick2Arr.append(stick1Arr.popLast()!)
-//                print(stick1Arr, "stick1")
-//                print(stick2Arr, "stick2")
-                print(piece)
-                DispatchQueue.main.async() {
-                    piece!.removeFromSuperview()
-                }
-                self.renderDisks()
             } else if (rightAreaCoordinate?.contains(piece!.center)) == true {
+                let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick3Arr.count * diskHeight))
+                piece?.center = CGPoint(x: RightStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
                 stick3Arr.append(stick1Arr.popLast()!)
-                DispatchQueue.main.async() {
-                    piece!.removeFromSuperview()
-                }
-                self.renderDisks()
             } else {
                 print("it was here")
                 piece?.center = initialCenter
