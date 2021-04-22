@@ -28,23 +28,51 @@ class ViewController: UIViewController {
     
     func renderDisks() {
         
-        print(stick1Arr)
-        print(LeftStickArea.superview?.convert(LeftStickArea.frame, to: nil))
-        print(LeftStickArea.superview!.frame.minY)
-        print(LeftStickArea.center)
-        print(LeftStickArea.frame)
-        print(MiddleStickArea.center)
-        print(MiddleStickArea.frame)
+//        print(LeftStickArea.superview!.frame.minY)
+//        print(LeftStickArea.center)
+//        print(LeftStickArea.frame)
+//        print(MiddleStickArea.center)
+//        print(MiddleStickArea.frame)
+//        print(stick1Arr)
         
-        let rootView = UIApplication.shared.keyWindow?.rootViewController?.view
-        print(rootView)
-        print(MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view))
+        let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
+//        print(frameGlobalPosition!.maxY)
+//        print(frameGlobalPosition!.height)
+//        print(frameGlobalPosition)
+//        print(MiddleStickArea.center)
+        print(stick1Arr)
         
         for (index, diskDatum) in stick1Arr.enumerated() {
+            print(diskDatum)
             let diskWidth = diskWidths[diskDatum - 1];
             let diskColor = diskColors[diskDatum - 1];
             createRectangle(
-                y: 391 + 143 - ((index + 1) * diskHeight),
+                x: Int(LeftStickArea.center.x),
+                y: Int(frameGlobalPosition!.maxY) - ((index + 1) * diskHeight),
+                color: diskColor,
+                width: diskWidth,
+                height: diskHeight
+            )
+        }
+        
+        for (index, diskDatum) in stick2Arr.enumerated() {
+            let diskWidth = diskWidths[diskDatum - 1];
+            let diskColor = diskColors[diskDatum - 1];
+            createRectangle(
+                x: Int(MiddleStickArea.center.x),
+                y: Int(frameGlobalPosition!.maxY) - ((index + 1) * diskHeight),
+                color: diskColor,
+                width: diskWidth,
+                height: diskHeight
+            )
+        }
+        
+        for (index, diskDatum) in stick3Arr.enumerated() {
+            let diskWidth = diskWidths[diskDatum - 1];
+            let diskColor = diskColors[diskDatum - 1];
+            createRectangle(
+                x: Int(RightStickArea.center.x),
+                y: Int(frameGlobalPosition!.maxY) - ((index + 1) * diskHeight),
                 color: diskColor,
                 width: diskWidth,
                 height: diskHeight
@@ -53,6 +81,7 @@ class ViewController: UIViewController {
     }
     
     func createRectangle(
+        x: Int,
         y: Int,
         color: UIColor,
         width: Int,
@@ -60,7 +89,9 @@ class ViewController: UIViewController {
 //        targetView: UIView
     ) {
         let viewObject = UIView();
-        viewObject.frame = CGRect(x: 69 - (width / 2), y: y, width: width, height: height);
+        viewObject.frame = CGRect(x: 0, y: y, width: width, height: height);
+        let currentY = viewObject.center.y;
+        viewObject.center = CGPoint(x: x, y: Int(currentY))
         viewObject.backgroundColor = color;
 
         view.addSubview(viewObject)
@@ -76,19 +107,49 @@ class ViewController: UIViewController {
         let piece = recognizer.view
         let translation = recognizer.translation(in: piece?.superview)
         
+        func getOriginView = () {
+            
+        }
+        
         if recognizer.state == .began{
             initialCenter = piece!.center
         }
         
         if recognizer.state != .cancelled{
+            print("not canceled")
             let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
             piece?.center = newCenter
         } else {
+            print("canceled")
             piece?.center = initialCenter
         }
         
         if(recognizer.state == .ended) {
-            piece?.center = initialCenter
+            let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
+            let rightAreaCoordinate = RightStickArea.superview?.convert(RightStickArea.frame, to: view)
+            if ((middleAreaCoordinate?.contains(piece!.center)) == true) {
+//                TODO: move disk datum to arr
+//                print(MiddleStickArea.superview?.convert(MiddleStickArea.center, to: view))
+//                let yCoordinate = CGFloat(Int(middleAreaCoordinate!.maxY) - (stick2Arr.count * diskHeight))
+//                piece?.center = CGPoint(x: MiddleStickArea.center.x, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
+                stick2Arr.append(stick1Arr.popLast()!)
+//                print(stick1Arr, "stick1")
+//                print(stick2Arr, "stick2")
+                print(piece)
+                DispatchQueue.main.async() {
+                    piece!.removeFromSuperview()
+                }
+                self.renderDisks()
+            } else if (rightAreaCoordinate?.contains(piece!.center)) == true {
+                stick3Arr.append(stick1Arr.popLast()!)
+                DispatchQueue.main.async() {
+                    piece!.removeFromSuperview()
+                }
+                self.renderDisks()
+            } else {
+                print("it was here")
+                piece?.center = initialCenter
+            }
         }
     }
     
