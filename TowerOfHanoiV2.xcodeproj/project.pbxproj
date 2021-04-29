@@ -15,6 +15,7 @@
 		181123AB262E776E0002ABBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181123A9262E776E0002ABBA /* LaunchScreen.storyboard */; };
 		182B571F262F24DA000B7EAE /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B571E262F24DA000B7EAE /* Disk.swift */; };
 		182B5723262F2864000B7EAE /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B5722262F2864000B7EAE /* Helper.swift */; };
+		18A8731C2635974C00ABD8DE /* PreferenceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8731B2635974C00ABD8DE /* PreferenceVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		181123AC262E776E0002ABBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		182B571E262F24DA000B7EAE /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
 		182B5722262F2864000B7EAE /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		18A8731B2635974C00ABD8DE /* PreferenceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				181123A2262E776C0002ABBA /* ViewController.swift */,
+				18A8731B2635974C00ABD8DE /* PreferenceVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				182B571F262F24DA000B7EAE /* Disk.swift in Sources */,
+				18A8731C2635974C00ABD8DE /* PreferenceVC.swift in Sources */,
 				181123A3262E776C0002ABBA /* ViewController.swift in Sources */,
 				182B5723262F2864000B7EAE /* Helper.swift in Sources */,
 				1811239F262E776C0002ABBA /* AppDelegate.swift in Sources */,

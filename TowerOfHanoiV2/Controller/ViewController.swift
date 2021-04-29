@@ -38,7 +38,6 @@ class ViewController: UIViewController {
 
         let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
         
-        print(frameGlobalPosition?.maxY)
         
         
         for (index, diskDatum) in diskPositionArr[0].enumerated() {
@@ -91,8 +90,8 @@ class ViewController: UIViewController {
         func moveDisk( oldArea: String, newArea: String ,_ onCancel: () -> Void) {
             print(oldArea, newArea)
             var newAreaCenterX: CGFloat;
-            var movingDiskNum = diskPositionArr[diskPositionDict[oldArea]!].last ?? 0;
-            var topTargetDiskNum = diskPositionArr[diskPositionDict[newArea]!].last ?? 0;
+            let movingDiskNum = diskPositionArr[diskPositionDict[oldArea]!].last ?? 0;
+            let topTargetDiskNum = diskPositionArr[diskPositionDict[newArea]!].last ?? 0;
             
             print(movingDiskNum, "moving")
             print(topTargetDiskNum, "new")
@@ -112,11 +111,7 @@ class ViewController: UIViewController {
             
             let yCoordinate = CGFloat(middleAreaCoordinate!.maxY) - CGFloat(diskPositionArr[diskPositionDict[newArea]!].count * diskHeight)
             piece?.center = CGPoint(x: newAreaCenterX, y: yCoordinate - (0.5 * CGFloat(diskHeight)))
-            print(diskPositionArr[diskPositionDict[newArea]!], "new")
-            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
             diskPositionArr[diskPositionDict[newArea]!].append(diskPositionArr[diskPositionDict[oldArea]!].popLast()!)
-//            print(diskPositionArr[diskPositionDict[newArea]!], "new")
-//            print(diskPositionArr[diskPositionDict[oldArea]!], "old")
             moveCount += 1
             MoveCountLabel.text = String(moveCount);
         }
@@ -126,9 +121,10 @@ class ViewController: UIViewController {
         let piece = recognizer.view
         let translation = recognizer.translation(in: piece?.superview)
         
+        print(piece)
+        
         let leftAreaCoordinate = LeftStickArea.superview?.convert(LeftStickArea.frame, to: view)
         let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
-        let rightAreaCoordinate = RightStickArea.superview?.convert(RightStickArea.frame, to: view)
         
         if recognizer.state == .began{
             initialCenter = piece!.center
