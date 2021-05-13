@@ -23,22 +23,24 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var MoveCountLabel: UILabel!
     
+    var diskViewArr = [UIView]()
+    
     var initialCenter = CGPoint();
-    var diskNumber = 5;
+    var diskNumber = 1;
     var moveCount = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad();
         
         setupDiskNumber(number: diskNumber)
-        renderDisks()
+        DispatchQueue.main.async {
+            self.renderDisks()
+        }
     }
     
     func renderDisks() {
 
         let frameGlobalPosition = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view);
-        
-        
         
         for (index, diskDatum) in diskPositionArr[0].enumerated() {
             let diskWidth = diskWidths[diskDatum - 1];
@@ -52,6 +54,13 @@ class ViewController: UIViewController {
             )
         }
         
+    }
+    
+    func cleanUpDisks() {
+        for (index, diskView) in diskViewArr.enumerated() {
+            diskView.removeFromSuperview()
+            diskPositionArr = Array(repeating: Array(repeating: 0, count: 0), count: 3);
+        }
     }
     
     func createRectangle(
@@ -68,6 +77,8 @@ class ViewController: UIViewController {
         viewObject.backgroundColor = color;
 
         view.addSubview(viewObject)
+        
+        diskViewArr.append(viewObject)
                 
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture(recognizer:)))
         viewObject.addGestureRecognizer(panGesture)
@@ -88,13 +99,9 @@ class ViewController: UIViewController {
         }
         
         func moveDisk( oldArea: String, newArea: String ,_ onCancel: () -> Void) {
-            print(oldArea, newArea)
             var newAreaCenterX: CGFloat;
             let movingDiskNum = diskPositionArr[diskPositionDict[oldArea]!].last ?? 0;
             let topTargetDiskNum = diskPositionArr[diskPositionDict[newArea]!].last ?? 0;
-            
-            print(movingDiskNum, "moving")
-            print(topTargetDiskNum, "new")
             
             if (movingDiskNum > topTargetDiskNum && topTargetDiskNum != 0) {
                 onCancel()
@@ -120,8 +127,6 @@ class ViewController: UIViewController {
         guard recognizer.view != nil else {return}
         let piece = recognizer.view
         let translation = recognizer.translation(in: piece?.superview)
-        
-        print(piece)
         
         let leftAreaCoordinate = LeftStickArea.superview?.convert(LeftStickArea.frame, to: view)
         let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
@@ -155,9 +160,39 @@ class ViewController: UIViewController {
     }
     
     func setupDiskNumber(number: Int) {
+        diskPositionArr = Array(repeating: Array(repeating: 0, count: 0), count: 3);
         for i in (1 ..< number + 1).reversed() {
             diskPositionArr[0].append(i)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dest = segue.destination as! PreferenceVC
+        dest.diskNumber = self.diskNumber
+        dest.delegate = self
+        return
+    }
 }
 
+extension ViewController: StackViewDelegate {
+    
+    func increaseDiskStack(sender: PreferenceVC) {
+        self.diskNumber += 1
+        
+//        DispatchQueue.main.async { [self] in
+            cleanUpDisks()
+            setupDiskNumber(number: self.diskNumber)
+            renderDisks()
+        
+        sender.diskNumber = self.diskNumber
+//        }
+    }
+    
+    func decreaseDiskStack(sender: PreferenceVC) {
+        print("there", self.diskNumber)
+        self.diskNumber -= 1
+        
+        setupDiskNumber(number: self.diskNumber)
+        renderDisks()
+    }
+}
