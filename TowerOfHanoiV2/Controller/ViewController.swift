@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     var diskViewArr = [UIView]()
     
     var initialCenter = CGPoint();
-    var diskNumber = 1;
+    var diskNumber = 3;
     var moveCount = 0;
     
     override func viewDidLoad() {
@@ -176,23 +176,30 @@ class ViewController: UIViewController {
 
 extension ViewController: StackViewDelegate {
     
+    private func resetStack() {
+        cleanUpDisks()
+        setupDiskNumber(number: self.diskNumber)
+        renderDisks()
+        moveCount = 0
+        MoveCountLabel.text = String(moveCount);
+    }
+    
     func increaseDiskStack(sender: PreferenceVC) {
         self.diskNumber += 1
         
-//        DispatchQueue.main.async { [self] in
-            cleanUpDisks()
-            setupDiskNumber(number: self.diskNumber)
-            renderDisks()
-        
+        resetStack()
         sender.diskNumber = self.diskNumber
-//        }
     }
     
     func decreaseDiskStack(sender: PreferenceVC) {
-        print("there", self.diskNumber)
+        
         self.diskNumber -= 1
         
-        setupDiskNumber(number: self.diskNumber)
-        renderDisks()
+        resetStack()
+        sender.diskNumber = self.diskNumber
+    }
+    
+    func restartGame(sender: PreferenceVC) {
+        resetStack()
     }
 }

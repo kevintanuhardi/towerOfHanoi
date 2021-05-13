@@ -11,6 +11,7 @@ import UIKit
 protocol StackViewDelegate {
     func increaseDiskStack(sender: PreferenceVC)
     func decreaseDiskStack(sender: PreferenceVC)
+    func restartGame(sender: PreferenceVC)
 }
 
 
@@ -23,6 +24,7 @@ class PreferenceVC: UIViewController {
     @IBOutlet weak var DownArrowButton: UIButton!
     @IBOutlet weak var UpArrowButton: UIButton!
     
+    @IBOutlet weak var RestartButton: UIButton!
     var delegate: StackViewDelegate?
     
     func setupUI () {
@@ -30,7 +32,7 @@ class PreferenceVC: UIViewController {
         DiskCountLabel.text = String(diskNumber)
         
         //condition for down button
-        if diskNumber == 1 {
+        if diskNumber == 3 {
             DownArrowButton.set(isEnabled: false)
         } else {
             DownArrowButton.set(isEnabled: true)
@@ -52,6 +54,10 @@ class PreferenceVC: UIViewController {
     @IBAction func UpArrowButtonClicked(_ sender: PreferenceVC) {
         delegate?.increaseDiskStack(sender: self)
         setupUI()
+    }
+    
+    @IBAction func RestartButtonClicked(_ sender: PreferenceVC) {
+        delegate?.restartGame(sender: self)
     }
     
     
