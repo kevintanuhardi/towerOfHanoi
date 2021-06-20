@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 var diskPositionDict = [
     "left": 0,
@@ -33,10 +34,16 @@ class ViewController: UIViewController {
         super.viewDidLoad();
         
         setupDiskNumber(number: diskNumber)
+        
+        // We can use this or viewDidAppear
         DispatchQueue.main.async {
             self.renderDisks()
         }
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        self.renderDisks()
+//    }
     
     func renderDisks() {
 
@@ -50,7 +57,8 @@ class ViewController: UIViewController {
                 y: Int(frameGlobalPosition!.maxY) - ((index + 1) * diskHeight),
                 color: diskColor,
                 width: diskWidth,
-                height: diskHeight
+                height: diskHeight,
+                diskIdentifier: "disk-\(diskDatum)"
             )
         }
         
@@ -68,15 +76,48 @@ class ViewController: UIViewController {
         y: Int,
         color: UIColor,
         width: Int,
-        height: Int
+        height: Int,
+        diskIdentifier: String
     ) {
         let viewObject = UIView();
+        let diskLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 21))
         viewObject.frame = CGRect(x: 0, y: y, width: width, height: height);
         let currentY = viewObject.center.y;
         viewObject.center = CGPoint(x: x, y: Int(currentY))
         viewObject.backgroundColor = color;
+        viewObject.accessibilityIdentifier = diskIdentifier
+        
+        
+//        diskLabel.center = CGPoint(x: viewObject.center.x, y: viewObject.center.x)
+        diskLabel.textAlignment = .center
+        diskLabel.text = "test"
+        
+        DispatchQueue.main.async {
+            self.view.addSubview(viewObject)
+//            viewObject.addSubview(diskLabel)
+//            let constraints = [
+//                diskLabel.centerXAnchor.constraint(equalTo: viewObject.centerXAnchor)
+////                diskLabel.widthAnchor.constraint(equalToConstant: 50),
+////                diskLabel.heightAnchor.constraint(equalToConstant: 21)
+//            ]
+//            NSLayoutConstraint.activate(constraints)
+        }
+        
+//        NSLayoutConstraint.activate([
+//          //2
+//          diskLabel.topAnchor.constraint(
+//            equalTo: diskLabel.topAnchor,
+//            constant: 0),
+//          //3
+//          diskLabel.leadingAnchor.constraint(equalTo: diskLabel.leadingAnchor),
+//          diskLabel.trailingAnchor.constraint(
+//            equalTo: diskLabel.trailingAnchor,
+//            constant: 0),
+//          diskLabel.bottomAnchor.constraint(
+//            equalTo: diskLabel.bottomAnchor,
+//            constant: 0)
+//        ])
 
-        view.addSubview(viewObject)
         
         diskViewArr.append(viewObject)
                 
@@ -84,7 +125,7 @@ class ViewController: UIViewController {
         viewObject.addGestureRecognizer(panGesture)
 
         viewObject.isUserInteractionEnabled = true
-    }
+     }
     
     
     @objc func panGesture(recognizer: UIPanGestureRecognizer){
@@ -127,24 +168,34 @@ class ViewController: UIViewController {
         guard recognizer.view != nil else {return}
         let piece = recognizer.view
         let translation = recognizer.translation(in: piece?.superview)
-        
         let leftAreaCoordinate = LeftStickArea.superview?.convert(LeftStickArea.frame, to: view)
         let middleAreaCoordinate = MiddleStickArea.superview?.convert(MiddleStickArea.frame, to: view)
         
-        if recognizer.state == .began{
-            initialCenter = piece!.center
-        }
+        var originArea:String = classifyArea(initialCenter);
         
         let setToInitialPosition = { () -> Void in
             piece?.center = self.initialCenter
         }
         
-        let originArea:String = classifyArea(initialCenter);
+        
+        if recognizer.state == .began {
+            initialCenter = piece!.center
+        }
         
         
         if recognizer.state != .cancelled{
+            // Move only disk on top of the stack
+            guard let currentDiskIdentifier = piece?.accessibilityIdentifier  else {
+                return
+            }
+            originArea = classifyArea(initialCenter)
+            let identifierArr = currentDiskIdentifier.components(separatedBy: "-")
+            let diskNum = Int(identifierArr[1])
+            let lastOfCurrStack = diskPositionArr[diskPositionDict[originArea]!].last
             let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
-            piece?.center = newCenter
+            if diskNum == lastOfCurrStack {
+                piece?.center = newCenter
+            }
         } else {
             piece?.center = initialCenter
         }
